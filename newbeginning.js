@@ -10,18 +10,49 @@ let south = false
 let west = false
 let twopoints = 0
 let onepoints = 0
-
+let voneplus=40
+let voneminus=-40
+let vtwoplus=40
+let vtwominus=-40
 let x = 0
 let z = 0
 let xt= 0
 let zt = 0
-
+let counterone=true
+let countertwo=true
+// window.addEventListener("keypress", e=> {
+//         if(e.keyCode===77) {
+//             if(countertwo) {
+//                 vtwoplus=80
+//                 vtwominus=-80
+//                 console.log("doubling two speed")
+//                 countertwo=false
+//             }
+//             else {
+//                 vtwoplus=40
+//                 vtwominus=-40
+//                 countertwo=true
+//             }
+//         }
+//         if(e.keyCode===88) {
+//             if(counterone) {
+//                 voneplus=80
+//                 voneminus=-80
+//                 counterone=false
+//             }
+//             else {
+//                 voneplus=40
+//                 voneminus=-40
+//                 counterone=true
+//             }
+//     }
+// })
 
 window.addEventListener("keydown", e=> {
     console.log(e.keyCode);
     if(e.keyCode===68) {
         east=true
-        x=40
+        x=voneplus
         // pOne.removeAttribute("static-body")
         // pOne.setAttribute("dynamic-body", "")
         // pOne.setAttribute("mass", "10")
@@ -29,7 +60,7 @@ window.addEventListener("keydown", e=> {
     }
     if(e.keyCode===87) {
         north=true
-        z=-40
+        z=voneminus
         // pOne.removeAttribute("static-body")
         // pOne.setAttribute("dynamic-body", "")
         // pOne.setAttribute("mass", "10")
@@ -37,7 +68,7 @@ window.addEventListener("keydown", e=> {
     }
     if(e.keyCode===65) {
         west=true
-        x=-40
+        x=voneminus
         // pOne.removeAttribute("static-body")
         // pOne.setAttribute("dynamic-body", "")
         // pOne.setAttribute("mass", "10")
@@ -45,39 +76,38 @@ window.addEventListener("keydown", e=> {
     }
     if(e.keyCode===83) {
         south=true
-        z=40
+        z=voneplus
         // pOne.removeAttribute("static-body")
         // pOne.setAttribute("dynamic-body", "")
         // pOne.setAttribute("mass", "10")
         pOne.setAttribute("velocity", `${x} 0 ${z}`)
     }
     if(e.keyCode===76) {
-        xt=40
+        xt=vtwoplus
         // pTwo.removeAttribute("static-body")
         // pTwo.setAttribute("kinematic-body", "")
         pTwo.setAttribute("velocity", `${xt} 0 ${zt}`)
     }
     if(e.keyCode===73) {
-        zt=-40
+        zt=vtwominus
         // pTwo.removeAttribute("static-body")
         // pTwo.setAttribute("kinematic-body", "")
         pTwo.setAttribute("velocity", `${xt} 0 ${zt}`)
     }
     if(e.keyCode===74) {
-        xt=-40
+        xt=vtwominus
         // pTwo.removeAttribute("static-body")
         // pTwo.setAttribute("kinematic-body", "")
         pTwo.setAttribute("velocity",`${xt} 0 ${zt}` )
     }
     if(e.keyCode===75) {
-        zt=40
+        zt=vtwoplus
         // pTwo.removeAttribute("static-body")
         // pTwo.setAttribute("kinematic-body", "")
         pTwo.setAttribute("velocity", `${xt} 0 ${zt}`)
     }
     console.log(ball.object3D.position)
 })
-
 
 window.addEventListener("keyup", e=> {
     if(e.keyCode===74) {
@@ -145,7 +175,7 @@ goals.forEach(goal => {
             ball.removeAttribute("static-body")
             ball.setAttribute("dynamic-body", "")
             twopoints++
-            scoreent.innerHTML=`<a-text id="score" value="Score: ${twopoints} - ${onepoints}" color="turquoise" position= "60 0 0" scale="30 30 30" rotation="-90 0 0"></a-text>`
+            scoreent.innerHTML=`<a-text id="score" value="Score: ${twopoints} - ${onepoints}" color="turquoise" position= "50 0 0" scale="30 30 30" rotation="-90 0 0"></a-text>`
         }
         if(goal.id==="goalone") {
             ball.removeAttribute("dynamic-body")
@@ -154,8 +184,18 @@ goals.forEach(goal => {
             ball.removeAttribute("static-body")
             ball.setAttribute("dynamic-body", "")
             onepoints++
-            scoreent.innerHTML=`<a-text id="score" value="Score: ${twopoints} - ${onepoints}" color="turquoise" position= "60 0 0" scale="30 30 30" rotation="-90 0 0"></a-text>`
+            scoreent.innerHTML=`<a-text id="score" value="Score: ${twopoints} - ${onepoints}" color="turquoise" position= "50 0 0" scale="30 30 30" rotation="-90 0 0"></a-text>`
+        }
+        if(onepoints===3) {
+            scoreent.innerHTML=`<a-text id="score" value="Score: Blue\nWins" color="blue" position= "50 0 0" scale="30 30 30" rotation="-90 0 0"></a-text>`
+            onepoints=0
+            twopoints=0
+        }
+        if(twopoints===3) {
+            twopoints=0
+            onepoints=0
+            scoreent.innerHTML=`<a-text id="score" value="Score: Orange\nWins" color="orange" position= "50 0 0" scale="30 30 30" rotation="-90 0 0"></a-text>`
         }
     })
-        scoreent.innerHTML=`<a-text id="score" value="Score: Orange wins" color="turquoise" position= "60 0 0" scale="30 30 30" rotation="-90 0 0"></a-text>`
+        
 })
