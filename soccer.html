@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	  <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+	  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
+        <script src="https://cdn.rawgit.com/archilogic-com/aframe-gblock/6498b71d/dist/gblock.js"></script>
+
+	
+
+
+
+
+
+</head>
+
+<body>
+	<a-scene>
+		<a-plane rotation="-90 0 0" static-body position="0 -1 0" width="100" height="100" color="#7BC8A4"></a-plane>
+		
+		<a-sphere color="purple" id="ball" dynamic-body velocity="400 2 400" position="0  0 0" radius="1.5" mass="1"   ></a-sphere>
+		
+
+
+	
+
+
+		<a-entity class="camera" id="camera" rotation="-90 0 0" camera position="0 58 0">
+		</a-entity>
+
+		<a-sphere class="player" id="playerone" color="black" wasd-controls kinematic-body position="0 0 40" >
+		</a-sphere>
+
+
+		<a-sphere class="player" id="playertwo"  kinematic-body position="0 0 -40">
+		</a-sphere>
+	</a-scene>
+</body>
+<script type="text/javascript" src="head.js"></script>
+
+</html>
